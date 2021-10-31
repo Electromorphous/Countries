@@ -1,1 +1,20 @@
 @import "config";
+
+body {
+  @media (max-width: 375px) {
+    .header-container {
+      text-align: left;
+      padding: 20px;
+      .title {
+        font-size: 0.9rem;
+      }
+      .icon {
+        font-size: 0.9rem;
+      }
+      .button-text {
+        font-size: 0.8rem;
+        margin-left: 2px;
+      }
+    }
+  }
+}
