@@ -7,11 +7,10 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
     background: theme.palette.primary.light,
-    padding: "20px 0",
-    textAlign: "center",
+    padding: "20px 5%",
   },
   title: {
-    fontSize: "1.5rem",
+    fontSize: "1.4rem",
   },
   icon: {
     color: theme.palette.textColor.main,
@@ -36,14 +35,17 @@ function Header() {
       <Grid
         container
         alignItems="center"
-        justifyContent="space-around"
+        justifyContent="space-between"
         flexWrap="nowrap"
       >
         <Grid item xs={8}>
           <h1 className={`title ${classes.title}`}>Where in the world?</h1>
         </Grid>
-        <Grid item xs={4}>
-          <Button style={{ borderRadius: 10 }} onClick={toggleTheme}>
+        <Grid item xs={4} textAlign="right">
+          <Button
+            style={{ borderRadius: 10, width: "max-content" }}
+            onClick={toggleTheme}
+          >
             <DarkModeIcon className={`icon ${classes.icon}`} />
             <Typography className={`button-text ${classes.buttonText}`}>
               Dark Mode
