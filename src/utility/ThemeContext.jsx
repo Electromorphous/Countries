@@ -16,7 +16,7 @@ export default function ThemeContext({ children }) {
 
       primary: {
         light: "#fff",
-        main: "#fff",
+        main: "#eee",
       },
       textColor: {
         main: "#000",

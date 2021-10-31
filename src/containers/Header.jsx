@@ -8,6 +8,7 @@ const useStyles = makeStyles((theme) => ({
   headerContainer: {
     background: theme.palette.primary.light,
     padding: "20px 5%",
+    borderRadius: 0,
   },
   title: {
     fontSize: "1.4rem",
