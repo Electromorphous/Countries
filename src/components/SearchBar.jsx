@@ -6,6 +6,7 @@ import { makeStyles } from "@mui/styles";
 const useStyles = makeStyles((theme) => ({
   searchBarContainer: {
     background: theme.palette.primary.light,
+    margin: "10px 0",
     padding: "0 20px",
     borderRadius: 7,
   },

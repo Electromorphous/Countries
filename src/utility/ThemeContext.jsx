@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const ThemeUpdateContext = React.createContext();
 
@@ -14,9 +15,14 @@ export default function ThemeContext({ children }) {
     palette: {
       mode: "light",
 
+      background: {
+        default: "#fff",
+      },
+
       primary: {
         light: "#fff",
         main: "#eee",
+        dark: "#ddd",
       },
       textColor: {
         main: "#000",
@@ -27,9 +33,14 @@ export default function ThemeContext({ children }) {
     palette: {
       mode: "dark",
 
+      background: {
+        default: "#2B3743",
+      },
+
       primary: {
         light: "#2B3743",
         main: "#212E37",
+        dark: "#1c262e",
       },
       textColor: {
         main: "#fff",
@@ -44,6 +55,7 @@ export default function ThemeContext({ children }) {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <ThemeUpdateContext.Provider value={toggleTheme}>
+        <CssBaseline />
         {children}
       </ThemeUpdateContext.Provider>
     </ThemeProvider>

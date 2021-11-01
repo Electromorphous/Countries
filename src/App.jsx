@@ -7,7 +7,10 @@ import Home from "./containers/Home";
 function App() {
   return (
     <ThemeContext>
-      <Paper style={{ width: "100%", height: "100%", borderRadius: 0 }}>
+      <Paper
+        elevation={0}
+        style={{ width: "100%", height: "100%", borderRadius: 0 }}
+      >
         <Header />
         <Home />
       </Paper>
