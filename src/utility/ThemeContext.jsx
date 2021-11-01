@@ -18,13 +18,15 @@ export default function ThemeContext({ children }) {
       background: {
         default: "#fff",
       },
-
       primary: {
         light: "#fff",
         main: "#eee",
         dark: "#ddd",
       },
       textColor: {
+        main: "#000",
+      },
+      loader: {
         main: "#000",
       },
     },
@@ -36,13 +38,15 @@ export default function ThemeContext({ children }) {
       background: {
         default: "#2B3743",
       },
-
       primary: {
         light: "#2B3743",
         main: "#212E37",
         dark: "#1c262e",
       },
       textColor: {
+        main: "#fff",
+      },
+      loader: {
         main: "#fff",
       },
     },

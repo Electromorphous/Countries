@@ -33,7 +33,6 @@ export default function BasicSelect() {
       <FormControl fullWidth>
         <InputLabel className={classes.inputLabel}>Filter by Region</InputLabel>
         <Select
-          className={classes.selectField}
           value={region}
           label="Region"
           IconComponent={KeyboardArrowDownIcon}
