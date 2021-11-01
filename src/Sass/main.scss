@@ -23,4 +23,19 @@ body {
       border: none;
     }
   }
+
+  .countries-container {
+    .card-container {
+      flex: 0 0 22%;
+      margin: 30px 0;
+
+      @media (max-width: $medium-width) {
+        flex: 0 0 45%;
+      }
+      @media (max-width: $small-width) {
+        flex: 0 0 80%;
+        margin: 30px auto;
+      }
+    }
+  }
 }

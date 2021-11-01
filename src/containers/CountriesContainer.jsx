@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
+import CustomCard from "../components/CustomCard";
 
 const useStyles = makeStyles((theme) => ({
   countriesContainer: {
-    margin: "50px 10px",
+    margin: "20px 0",
+    flexWrap: "wrap",
   },
   loader: {
     color: theme.palette.loader.main,
@@ -36,13 +38,20 @@ function CountriesContainer() {
       container
       alignItems="center"
       justifyContent="space-between"
-      className={classes.countriesContainer}
+      className={`countries-container ${classes.countriesContainer}`}
     >
       <>
         {!!countries.length ? (
           countries.map((country) => (
-            <Grid item xs={12} sm={6} md={3} key={country.name.common}>
-              {country.name.common}
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              className="card-container"
+              key={country.name.common}
+            >
+              <CustomCard country={country} />
             </Grid>
           ))
         ) : (
