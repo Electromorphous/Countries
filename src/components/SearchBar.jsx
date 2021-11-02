@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SearchBar() {
+function SearchBar({ setInput }) {
   const classes = useStyles();
   return (
     <Paper
@@ -25,6 +25,7 @@ function SearchBar() {
         sx={{ ml: 1, flex: 1, margin: 2 }}
         placeholder="Search for a country..."
         inputProps={{ "aria-label": "search for a country" }}
+        onChange={(event) => setInput(event.target.value)}
       />
     </Paper>
   );

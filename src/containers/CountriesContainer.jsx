@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CountriesContainer() {
+function CountriesContainer({ input }) {
   const classes = useStyles();
 
   const [countries, setCountries] = useState([]);
@@ -42,18 +42,27 @@ function CountriesContainer() {
     >
       <>
         {!!countries.length ? (
-          countries.map((country) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={3}
-              className="card-container"
-              key={country.name.common}
-            >
-              <CustomCard country={country} />
-            </Grid>
-          ))
+          countries.map((country) => {
+            if (
+              country.name.common.toLowerCase().includes(input.toLowerCase())
+            ) {
+              return (
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  md={3}
+                  className="card-container"
+                  key={country.name.common}
+                >
+                  <CustomCard country={country} />
+                </Grid>
+              );
+            }
+            return (
+              <div style={{ display: "none" }} key={country.name.common}></div>
+            );
+          })
         ) : (
           <CircularProgress className={classes.loader} />
         )}
