@@ -18,6 +18,9 @@ function Home() {
   const classes = useStyles();
 
   const [input, setInput] = useState("");
+  const [regions, setRegions] = useState([]);
+
+  const regionNames = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   return (
     <Paper elevation={0} className={`home-container ${classes.homeContainer}`}>
@@ -26,7 +29,11 @@ function Home() {
           <SearchBar setInput={setInput} />
         </Grid>
         <Grid item xs={6} sm={4} md={3} lg={2}>
-          <Filter />
+          <Filter
+            regions={regions}
+            setRegions={setRegions}
+            regionNames={regionNames}
+          />
         </Grid>
       </Grid>
 

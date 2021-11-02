@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@mui/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import {
@@ -24,11 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function BasicSelect() {
+export default function Filter({ regions, setRegions, regionNames }) {
   const classes = useStyles();
   const theme = useTheme();
-
-  const [regions, setRegions] = useState([]);
 
   const handleChange = (event) => {
     const {
@@ -36,8 +34,6 @@ export default function BasicSelect() {
     } = event;
     setRegions(typeof value === "string" ? value.split(",") : value);
   };
-
-  const regionNames = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   return (
     <Paper
