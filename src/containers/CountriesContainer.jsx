@@ -19,6 +19,7 @@ function CountriesContainer({ input }) {
   const classes = useStyles();
 
   const [countries, setCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
 
   async function fetchCountries() {
     const data = await fetch("https://restcountries.com/v3.1/all").catch(
@@ -33,6 +34,20 @@ function CountriesContainer({ input }) {
     fetchCountries().then(setCountries);
   }, []);
 
+  useEffect(() => {
+    const filterCountries = () => {
+      setFilteredCountries(
+        countries.map((country) => {
+          if (country.name.common.toLowerCase().includes(input.toLowerCase())) {
+            return country;
+          }
+          return null;
+        })
+      );
+    };
+    filterCountries();
+  }, [input, countries]);
+
   return (
     <Grid
       container
@@ -41,11 +56,9 @@ function CountriesContainer({ input }) {
       className={`countries-container ${classes.countriesContainer}`}
     >
       <>
-        {!!countries.length ? (
-          countries.map((country) => {
-            if (
-              country.name.common.toLowerCase().includes(input.toLowerCase())
-            ) {
+        {!!filteredCountries.length ? (
+          filteredCountries.map((country) => {
+            if (country)
               return (
                 <Grid
                   item
@@ -58,10 +71,7 @@ function CountriesContainer({ input }) {
                   <CustomCard country={country} />
                 </Grid>
               );
-            }
-            return (
-              <div style={{ display: "none" }} key={country.name.common}></div>
-            );
+            return null;
           })
         ) : (
           <CircularProgress className={classes.loader} />

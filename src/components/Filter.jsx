@@ -28,8 +28,6 @@ export default function BasicSelect() {
   const classes = useStyles();
   const theme = useTheme();
 
-  console.log(theme.palette);
-
   const [regions, setRegions] = useState([]);
 
   const handleChange = (event) => {
@@ -38,8 +36,6 @@ export default function BasicSelect() {
     } = event;
     setRegions(typeof value === "string" ? value.split(",") : value);
   };
-
-  console.log(regions);
 
   const regionNames = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
