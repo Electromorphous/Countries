@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import { makeStyles } from "@mui/styles";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import {
+  MenuItem,
+  FormControl,
+  Select,
+  InputLabel,
+  Paper,
+  useTheme,
+  Checkbox,
+} from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   filterContainer: {
@@ -22,8 +26,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function BasicSelect() {
   const classes = useStyles();
+  const theme = useTheme();
 
-  const [region, setRegion] = useState("");
+  console.log(theme.palette);
+
+  const [regions, setRegions] = useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setRegions(typeof value === "string" ? value.split(",") : value);
+  };
+
+  console.log(regions);
+
+  const regionNames = ["Africa", "America", "Asia", "Europe", "Oceania"];
 
   return (
     <Paper
@@ -33,21 +51,30 @@ export default function BasicSelect() {
       <FormControl fullWidth>
         <InputLabel className={classes.inputLabel}>Filter by Region</InputLabel>
         <Select
-          value={region}
+          value={regions}
           label="Region"
+          multiple
           IconComponent={KeyboardArrowDownIcon}
-          onChange={(e) => {
-            setRegion(e.target.value);
+          onChange={handleChange}
+          renderValue={(selected) => selected.join(", ")}
+          MenuProps={{
+            PaperProps: {
+              style: {
+                marginTop: 10,
+                background: theme.palette.primary.light,
+              },
+            },
           }}
         >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value="Africa">Africa</MenuItem>
-          <MenuItem value="America">America</MenuItem>
-          <MenuItem value="Asia">Asia</MenuItem>
-          <MenuItem value="Europe">Europe</MenuItem>
-          <MenuItem value="Oceania">Oceania</MenuItem>
+          {regionNames.map((name) => (
+            <MenuItem key={name} value={name}>
+              <Checkbox
+                style={{ color: theme.palette.textColor.main }}
+                checked={regions.indexOf(name) > -1}
+              />
+              {name}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
     </Paper>
