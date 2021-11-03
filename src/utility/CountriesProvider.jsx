@@ -7,7 +7,7 @@ export function useCountries() {
 }
 
 export default function CountriesProvider({ children }) {
-  const getCountries = () => {
+  const useGetCountries = () => {
     const [array, setArray] = useState([]);
 
     async function fetchCountries() {
@@ -28,7 +28,7 @@ export default function CountriesProvider({ children }) {
     }, [array]);
   };
 
-  const countries = getCountries().array;
+  const countries = useGetCountries().array;
 
   return (
     <CountriesContext.Provider value={countries}>
