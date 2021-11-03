@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import CustomCard from "../components/CustomCard";
+import { useCountries } from "../utility/CountriesProvider";
 
 const useStyles = makeStyles((theme) => ({
   countriesContainer: {
@@ -18,23 +19,9 @@ const useStyles = makeStyles((theme) => ({
 function CountriesContainer({ input, regions }) {
   const classes = useStyles();
 
-  const [countries, setCountries] = useState([]);
+  const countries = useCountries();
+
   const [filteredCountries, setFilteredCountries] = useState([]);
-
-  async function fetchCountries() {
-    const data = await fetch("https://restcountries.com/v3.1/all").catch(
-      (error) => {
-        console.log(error);
-      }
-    );
-    return data.json();
-  }
-
-  useEffect(() => {
-    fetchCountries().then(setCountries);
-  }, []);
-
-  console.log(regions);
 
   useEffect(() => {
     const filterCountries = () => {

@@ -3,6 +3,7 @@ import ThemeContext from "./utility/ThemeContext";
 import { Paper } from "@mui/material";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
+import CountriesProvider from "./utility/CountriesProvider";
 
 function App() {
   return (
@@ -11,8 +12,10 @@ function App() {
         elevation={0}
         style={{ width: "100%", height: "100%", borderRadius: 0 }}
       >
-        <Header />
-        <Home />
+        <CountriesProvider>
+          <Header />
+          <Home />
+        </CountriesProvider>
       </Paper>
     </ThemeContext>
   );
