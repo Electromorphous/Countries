@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Card, CardContent, CardMedia, CardActionArea } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -32,8 +33,14 @@ const useStyles = makeStyles((theme) => ({
 export default function CustomCard({ country }) {
   const classes = useStyles();
 
+  const history = useHistory();
+
   return (
-    <Card elevation={0} className={classes.card}>
+    <Card
+      elevation={0}
+      className={classes.card}
+      onClick={() => history.push(`/${country.name.common}`)}
+    >
       <CardActionArea className={classes.cardActionArea}>
         <CardMedia
           className={classes.cardImage}

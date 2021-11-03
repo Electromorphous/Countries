@@ -1,9 +1,11 @@
 import React from "react";
+import { Route, Switch } from "react-router-dom";
 import ThemeContext from "./utility/ThemeContext";
 import { Paper } from "@mui/material";
+import CountriesProvider from "./utility/CountriesProvider";
 import Header from "./containers/Header";
 import Home from "./containers/Home";
-import CountriesProvider from "./utility/CountriesProvider";
+import Info from "./containers/Info";
 
 function App() {
   return (
@@ -14,7 +16,10 @@ function App() {
       >
         <CountriesProvider>
           <Header />
-          <Home />
+          <Switch>
+            <Route exact from="/" component={Home} />
+            <Route exact from="/:name" component={Info} />
+          </Switch>
         </CountriesProvider>
       </Paper>
     </ThemeContext>
