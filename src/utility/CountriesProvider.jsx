@@ -6,29 +6,24 @@ export function useCountries() {
   return useContext(CountriesContext);
 }
 
+const useGetCountries = () => {
+  const [countries, setCountries] = useState([]);
+
+  async function fetchCountries() {
+    return (
+      await fetch("https://restcountries.com/v3.1/all").catch(console.log)
+    ).json();
+  }
+
+  useEffect(() => {
+    fetchCountries().then(setCountries);
+  }, []);
+
+  return useMemo(() => countries, [countries]);
+};
+
 export default function CountriesProvider({ children }) {
-  const useGetCountries = () => {
-    const [array, setArray] = useState([]);
-
-    async function fetchCountries() {
-      const data = await fetch("https://restcountries.com/v3.1/all").catch(
-        (error) => {
-          console.log(error);
-        }
-      );
-      return data.json();
-    }
-
-    useEffect(() => {
-      fetchCountries().then(setArray);
-    }, []);
-
-    return useMemo(() => {
-      return { array };
-    }, [array]);
-  };
-
-  const countries = useGetCountries().array;
+  const countries = useGetCountries();
 
   return (
     <CountriesContext.Provider value={countries}>
