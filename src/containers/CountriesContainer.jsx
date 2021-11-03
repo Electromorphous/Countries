@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CountriesContainer({ input }) {
+function CountriesContainer({ input, regions }) {
   const classes = useStyles();
 
   const [countries, setCountries] = useState([]);
@@ -34,11 +34,16 @@ function CountriesContainer({ input }) {
     fetchCountries().then(setCountries);
   }, []);
 
+  console.log(regions);
+
   useEffect(() => {
     const filterCountries = () => {
       setFilteredCountries(
         countries.map((country) => {
-          if (country.name.common.toLowerCase().includes(input.toLowerCase())) {
+          if (
+            country.name.common.toLowerCase().includes(input.toLowerCase()) &&
+            (regions.length === 0 || regions.includes(country.region))
+          ) {
             return country;
           }
           return null;
@@ -46,7 +51,7 @@ function CountriesContainer({ input }) {
       );
     };
     filterCountries();
-  }, [input, countries]);
+  }, [input, countries, regions]);
 
   return (
     <Grid

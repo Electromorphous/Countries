@@ -20,7 +20,7 @@ function Home() {
   const [input, setInput] = useState("");
   const [regions, setRegions] = useState([]);
 
-  const regionNames = ["Africa", "America", "Asia", "Europe", "Oceania"];
+  const regionNames = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   return (
     <Paper elevation={0} className={`home-container ${classes.homeContainer}`}>
@@ -37,7 +37,7 @@ function Home() {
         </Grid>
       </Grid>
 
-      <CountriesContainer input={input} />
+      <CountriesContainer input={input} regions={regions} />
     </Paper>
   );
 }
