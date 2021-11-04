@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
 
@@ -19,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 7,
     textTransform: "capitalize",
   },
+  loader: {
+    position: "absolute",
+    color: theme.palette.textColor.main,
+    top: -5,
+    left: 175,
+    padding: 10,
+    opacity: 0.75,
+  },
 }));
 
 export default function BorderCountries({ country }) {
@@ -26,6 +34,7 @@ export default function BorderCountries({ country }) {
   const history = useHistory();
 
   const [borders, setBorders] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchBorder = async (code) => {
     return (
@@ -36,6 +45,8 @@ export default function BorderCountries({ country }) {
   };
 
   useEffect(() => {
+    setLoading(true);
+
     if (country.borders)
       country.borders.forEach((border) => {
         fetchBorder(border).then((res) =>
@@ -45,11 +56,12 @@ export default function BorderCountries({ country }) {
 
     return () => {
       setBorders([]);
+      setLoading(false);
     };
   }, [country]);
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
       <span className={classes.text}>Border Countries:</span>
       <>
         {borders.length > 0 ? (
@@ -66,7 +78,13 @@ export default function BorderCountries({ country }) {
             </Button>
           ))
         ) : (
-          <em>none</em>
+          <>
+            {loading ? (
+              <CircularProgress className={classes.loader} />
+            ) : (
+              <em>none</em>
+            )}
+          </>
         )}
       </>
     </div>
