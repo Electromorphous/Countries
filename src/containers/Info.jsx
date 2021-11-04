@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Grid, CircularProgress } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useCountries } from "../utility/CountriesProvider";
 import { makeStyles } from "@mui/styles";
 import BackButton from "../components/BackButton";
 import DetailsContainer from "./DetailsContainer";
+import Finding from "./Finding";
 
 const useStyles = makeStyles((theme) => ({
   infoContainer: {
@@ -30,30 +31,31 @@ function Info() {
   const countries = useCountries();
 
   const [country, setCountry] = useState({});
+  const [found, setFound] = useState(0);
 
   useEffect(() => {
     if (countries.length > 0) {
-      for (let obj of countries) {
-        if (obj.name.common.toLowerCase() === name.toLowerCase()) {
-          setCountry(obj);
-          break;
-        }
+      const foundCountry = countries.find(
+        (c) => c.name.common.toLowerCase() === name.toLowerCase()
+      );
+      if (foundCountry) {
+        setCountry(foundCountry);
+        setFound(1);
+        return;
+      } else {
+        setFound(-1);
+        return;
       }
-      // if (Object.keys(country).length === 0) console.log("country not found");
-      // console.log(country);
     }
     console.log(country);
   }, [countries, name, country]);
-
-  if (countries.length > 0 && Object.keys(country).length === 0)
-    console.log("country not found");
 
   return (
     <Grid container className={classes.infoContainer}>
       <Grid item xs={12}>
         <BackButton />
       </Grid>
-      {!!(country && country.name) ? (
+      {found === 1 ? (
         <>
           <Grid item xs={12} md={6} position="relative">
             <img
@@ -67,7 +69,7 @@ function Info() {
           <DetailsContainer country={country} />
         </>
       ) : (
-        <CircularProgress className={classes.loader} />
+        <Finding found={found} />
       )}
     </Grid>
   );
