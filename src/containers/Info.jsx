@@ -39,24 +39,14 @@ function Info() {
           break;
         }
       }
-      // console.log(country);
-      if (Object.keys(country).length === 0) console.log("country not found");
-    }
-    // console.log("here");
-    console.log(country);
-
-    // if (countries.length > 0 && Object.keys(country).length === 0) {
-    //   console.log("Country not found");
-    //   console.log(countries);
-    //   console.log(country);
-    // }
-
-    return () => {
       // if (Object.keys(country).length === 0) console.log("country not found");
-    };
+      // console.log(country);
+    }
+    console.log(country);
   }, [countries, name, country]);
 
-  // useMemo(() => country, [country]);
+  if (countries.length > 0 && Object.keys(country).length === 0)
+    console.log("country not found");
 
   return (
     <Grid container className={classes.infoContainer}>

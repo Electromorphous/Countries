@@ -3,6 +3,7 @@ import { Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Details1 from "../components/Details1";
 import Details2 from "../components/Details2";
+import BorderCountries from "../components/BorderCountries";
 
 const useStyles = makeStyles((theme) => ({
   detailsContainer: {
@@ -31,6 +32,9 @@ export default function DetailsContainer({ country }) {
         </Grid>
         <Grid item xs={12} md={6} padding="20px 20px 0 0">
           <Details2 country={country} />
+        </Grid>
+        <Grid item xs={12} paddingTop={5}>
+          <BorderCountries country={country} />
         </Grid>
       </Grid>
     </Grid>
