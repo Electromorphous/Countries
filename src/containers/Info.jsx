@@ -1,64 +1,84 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { Grid, Button } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { Grid, CircularProgress } from "@mui/material";
 import { useCountries } from "../utility/CountriesProvider";
 import { makeStyles } from "@mui/styles";
-import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+import BackButton from "../components/BackButton";
+import DetailsContainer from "./DetailsContainer";
 
 const useStyles = makeStyles((theme) => ({
   infoContainer: {
     background: theme.palette.primary.main,
     padding: "50px 5%",
+    alignItems: "center",
+    justifyContent: "space-between",
   },
-  buttonContainer: {
-    marginBottom: 50,
-  },
-  button: {
-    background: theme.palette.primary.light,
+  loader: {
     color: theme.palette.textColor.main,
-    padding: "10px 30px",
-    boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
-    borderRadius: 7,
-    textTransform: "capitalize",
-    fontSize: "1rem",
+    opacity: 0.75,
+    margin: " 50px auto",
+  },
+  flagImage: {
+    width: "100%",
+    paddingRight: 30,
   },
 }));
 
 function Info() {
   let { name } = useParams();
-
   const classes = useStyles();
   const countries = useCountries();
-  const history = useHistory();
 
   const [country, setCountry] = useState({});
 
   useEffect(() => {
-    for (let obj of countries) {
-      if (obj.name.common.toLowerCase() === name.toLowerCase()) {
-        setCountry(obj);
-        break;
+    if (countries.length > 0) {
+      for (let obj of countries) {
+        if (obj.name.common.toLowerCase() === name.toLowerCase()) {
+          setCountry(obj);
+          break;
+        }
       }
+      // console.log(country);
+      if (Object.keys(country).length === 0) console.log("country not found");
     }
-  }, [countries, name]);
+    // console.log("here");
+    console.log(country);
 
-  useMemo(() => country, [country]);
+    // if (countries.length > 0 && Object.keys(country).length === 0) {
+    //   console.log("Country not found");
+    //   console.log(countries);
+    //   console.log(country);
+    // }
+
+    return () => {
+      // if (Object.keys(country).length === 0) console.log("country not found");
+    };
+  }, [countries, name, country]);
+
+  // useMemo(() => country, [country]);
 
   return (
     <Grid container className={classes.infoContainer}>
-      <Grid item xs={12} className={classes.buttonContainer}>
-        <Button
-          variant="text"
-          startIcon={<KeyboardBackspaceIcon />}
-          className={classes.button}
-          onClick={() => {
-            history.push("/");
-          }}
-        >
-          back
-        </Button>
+      <Grid item xs={12}>
+        <BackButton />
       </Grid>
-      {!!(country && country.name) ? country.name.common : "country not found"}
+      {!!(country && country.name) ? (
+        <>
+          <Grid item xs={12} md={6} position="relative">
+            <img
+              className={`${classes.flagImage} flag-image`}
+              src={country.flags.svg}
+              alt={country.name.common}
+            />
+            <div className="overlay"></div>
+          </Grid>
+
+          <DetailsContainer country={country} />
+        </>
+      ) : (
+        <CircularProgress className={classes.loader} />
+      )}
     </Grid>
   );
 }
