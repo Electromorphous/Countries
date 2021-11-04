@@ -9,11 +9,11 @@ export function useCountries() {
 const useGetCountries = () => {
   const [countries, setCountries] = useState([]);
 
-  async function fetchCountries() {
+  const fetchCountries = async () => {
     return (
       await fetch("https://restcountries.com/v3.1/all").catch(console.log)
     ).json();
-  }
+  };
 
   useEffect(() => {
     fetchCountries().then(setCountries);
