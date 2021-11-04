@@ -4,6 +4,7 @@ import { makeStyles } from "@mui/styles";
 import SearchBar from "../components/SearchBar";
 import Filter from "../components/Filter";
 import CountriesContainer from "../containers/CountriesContainer";
+import Header from "./Header";
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
@@ -23,22 +24,28 @@ function Home() {
   const regionNames = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
 
   return (
-    <Paper elevation={0} className={`home-container ${classes.homeContainer}`}>
-      <Grid container alignItems="center" justifyContent="space-between">
-        <Grid item xs={12} sm={7} md={5}>
-          <SearchBar setInput={setInput} />
+    <>
+      <Header />
+      <Paper
+        elevation={0}
+        className={`home-container ${classes.homeContainer}`}
+      >
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item xs={12} sm={7} md={5}>
+            <SearchBar setInput={setInput} />
+          </Grid>
+          <Grid item xs={6} sm={4} md={3} lg={2}>
+            <Filter
+              regions={regions}
+              setRegions={setRegions}
+              regionNames={regionNames}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6} sm={4} md={3} lg={2}>
-          <Filter
-            regions={regions}
-            setRegions={setRegions}
-            regionNames={regionNames}
-          />
-        </Grid>
-      </Grid>
 
-      <CountriesContainer input={input} regions={regions} />
-    </Paper>
+        <CountriesContainer input={input} regions={regions} />
+      </Paper>
+    </>
   );
 }
 

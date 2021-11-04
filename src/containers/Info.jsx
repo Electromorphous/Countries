@@ -9,27 +9,14 @@ function Info() {
 
   const [country, setCountry] = useState({});
 
-  async function fetchCountry() {
-    return (
-      await fetch(
-        `https://restcountries.com/v3.1/name/${name.toLowerCase()}`
-      ).catch(console.log)
-    )
-      .json()
-      .then((res) => res[0]);
-  }
-
   useEffect(() => {
-    if (countries.length > 0) {
-      for (let obj of countries) {
-        if (obj.name.common.toLowerCase() === name.toLowerCase()) {
-          setCountry(obj);
-          break;
-        }
+    for (let obj of countries) {
+      if (obj.name.common.toLowerCase() === name.toLowerCase()) {
+        setCountry(obj);
+        break;
       }
     }
-    fetchCountry().then(setCountry);
-  }, []);
+  }, [countries, name]);
 
   useMemo(() => country, [country]);
 
