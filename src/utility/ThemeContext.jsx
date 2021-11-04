@@ -16,7 +16,7 @@ export default function ThemeContext({ children }) {
       mode: "light",
 
       background: {
-        default: "#fff",
+        default: "#eee",
       },
       primary: {
         light: "#fff",
@@ -36,7 +36,7 @@ export default function ThemeContext({ children }) {
       mode: "dark",
 
       background: {
-        default: "#2B3743",
+        default: "#212E37",
       },
       primary: {
         light: "#2B3743",
