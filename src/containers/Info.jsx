@@ -33,14 +33,22 @@ function Info() {
 
   useEffect(() => {
     if (countries.length > 0) {
-      for (let obj of countries) {
-        if (obj.name.common.toLowerCase() === name.toLowerCase()) {
-          setCountry(obj);
-          break;
-        }
+      const country = countries.find(
+        (c) => c.name.common.toLowerCase() === name.toLowerCase()
+      );
+      if (country) {
+        setCountry(country);
+        return;
       }
-      // console.log(country);
       if (Object.keys(country).length === 0) console.log("country not found");
+
+      // for (let obj of countries) {
+      //   if (obj.name.common.toLowerCase() === name.toLowerCase()) {
+      //     setCountry(obj);
+      //     break;
+      //   }
+      // }
+      // // console.log(country);
     }
     // console.log("here");
     console.log(country);
