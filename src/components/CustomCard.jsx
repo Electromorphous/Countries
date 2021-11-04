@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme) => ({
   card: {
     background: theme.palette.primary.light,
     height: 350,
+    borderRadius: 7,
   },
   cardActionArea: {
     height: "100%",

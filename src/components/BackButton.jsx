@@ -20,13 +20,14 @@ const useStyles = makeStyles((theme) => ({
 export default function BackButton() {
   const classes = useStyles();
   const history = useHistory();
+
   return (
     <Button
       variant="text"
       startIcon={<KeyboardBackspaceIcon />}
       className={classes.button}
       onClick={() => {
-        history.push("/");
+        history.goBack();
       }}
     >
       Back

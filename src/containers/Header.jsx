@@ -3,6 +3,7 @@ import { makeStyles } from "@mui/styles";
 import { useThemeUpdate } from "../utility/ThemeContext";
 import { Grid, Paper, Button, Typography } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
   headerContainer: {
@@ -11,7 +12,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 0,
   },
   title: {
+    width: "max-content",
     fontSize: "1.4rem",
+    cursor: "pointer",
   },
   icon: {
     color: theme.palette.textColor.main,
@@ -28,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 
 function Header() {
   const classes = useStyles();
-
+  const history = useHistory();
   const toggleTheme = useThemeUpdate();
 
   return (
@@ -40,7 +43,12 @@ function Header() {
         flexWrap="nowrap"
       >
         <Grid item xs={8}>
-          <h1 className={`title ${classes.title}`}>Where in the world?</h1>
+          <h1
+            className={`title ${classes.title}`}
+            onClick={() => history.push("/")}
+          >
+            Where in the world?
+          </h1>
         </Grid>
         <Grid item xs={4} textAlign="right">
           <Button

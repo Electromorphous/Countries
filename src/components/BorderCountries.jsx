@@ -39,12 +39,12 @@ export default function BorderCountries({ country }) {
   };
 
   useEffect(() => {
-    country.borders.forEach((border) => {
-      console.log(border);
-      fetchBorder(border).then((res) =>
-        setBorders((prevArray) => [...prevArray, res[0].name.common])
-      );
-    });
+    if (country.borders)
+      country.borders.forEach((border) => {
+        fetchBorder(border).then((res) =>
+          setBorders((prevArray) => [...prevArray, res[0].name.common])
+        );
+      });
 
     return () => {
       setBorders([]);
@@ -55,17 +55,22 @@ export default function BorderCountries({ country }) {
     <div className={classes.borderCountriesContainer}>
       <span className={classes.text}>Border Countries:</span>
       <>
-        {borders.map((border) => (
-          <Button
-            variant="text"
-            className={classes.button}
-            onClick={() => {
-              history.push(`/${border}`);
-            }}
-          >
-            {border}
-          </Button>
-        ))}
+        {borders.length > 0 ? (
+          borders.map((border) => (
+            <Button
+              variant="text"
+              key={border}
+              className={classes.button}
+              onClick={() => {
+                history.push(`/${border}`);
+              }}
+            >
+              {border}
+            </Button>
+          ))
+        ) : (
+          <em>none</em>
+        )}
       </>
     </div>
   );
