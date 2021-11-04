@@ -1,14 +1,24 @@
 import React from "react";
 import Header from "./Header";
 import Info from "./Info";
-import CountriesProvider from "../utility/CountriesProvider";
+import CountriesProvider, { useCountries } from "../utility/CountriesProvider";
 
 function InfoContainer() {
+  const countries = useCountries();
   return (
-    <CountriesProvider>
-      <Header />
-      <Info />
-    </CountriesProvider>
+    <>
+      {countries.length === 0 ? (
+        <CountriesProvider>
+          <Header />
+          <Info />
+        </CountriesProvider>
+      ) : (
+        <>
+          <Header />
+          <Info />
+        </>
+      )}
+    </>
   );
 }
 
