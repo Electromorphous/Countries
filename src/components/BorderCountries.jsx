@@ -4,9 +4,6 @@ import { makeStyles } from "@mui/styles";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
-  borderCountriesContainer: {
-    marginBottom: 50,
-  },
   text: {
     fontSize: "1.2rem",
     fontWeight: 600,
@@ -52,7 +49,7 @@ export default function BorderCountries({ country }) {
   }, [country]);
 
   return (
-    <div className={classes.borderCountriesContainer}>
+    <div>
       <span className={classes.text}>Border Countries:</span>
       <>
         {borders.length > 0 ? (
