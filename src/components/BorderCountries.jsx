@@ -53,10 +53,10 @@ export default function BorderCountries({ country }) {
           setBorders((prevArray) => [...prevArray, res[0].name.common])
         );
       });
+    else setLoading(false);
 
     return () => {
       setBorders([]);
-      setLoading(false);
     };
   }, [country]);
 

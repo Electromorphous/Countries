@@ -47,7 +47,6 @@ function Info() {
         return;
       }
     }
-    console.log(country);
   }, [countries, name, country]);
 
   return (
